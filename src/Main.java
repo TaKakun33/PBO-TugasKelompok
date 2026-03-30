@@ -8,7 +8,7 @@ public class Main {
     public static void main(String[] args) {
 
         System.out.println("╔══════════════════════════════════════════╗");
-        System.out.println("║   SISTEM POS - KEDAI TEH TARIK BAKAR     ║");
+        System.out.println("║   SISTEM POS - KEDAI TEH TARIK BAKAR    ║");
         System.out.println("╚══════════════════════════════════════════╝");
 
         // ---- Inisialisasi Item Menu ----
@@ -45,13 +45,13 @@ public class Main {
         // ---- Inisialisasi Kasir ----
         Kasir kasir = new Kasir("K001", "Budi Santoso", "Pagi");
         System.out.println("\n=== KASIR BERTUGAS ===");
-        System.out.println(kasir);
+        kasir.printInfo();
 
         // ==============================================================
         // SKENARIO 1: Pembayaran Tunai GAGAL (uang kurang)
         // ==============================================================
         System.out.println("\n\n══════════════════════════════════════════");
-        System.out.println("  SKENARIO 1 : Pembayaran Tunai (Kurang)  ");
+        System.out.println("SKENARIO 1 : Pembayaran Tunai (Kurang)  ");
         System.out.println("══════════════════════════════════════════");
 
         KeranjangPesanan keranjang1 = new KeranjangPesanan();
@@ -69,7 +69,7 @@ public class Main {
         // SKENARIO 2: Pembayaran Tunai BERHASIL
         // ==============================================================
         System.out.println("\n\n══════════════════════════════════════════");
-        System.out.println("  SKENARIO 2 : Pembayaran Tunai (Cukup)   ");
+        System.out.println("SKENARIO 2 : Pembayaran Tunai (Cukup)   ");
         System.out.println("══════════════════════════════════════════");
 
         KeranjangPesanan keranjang2 = new KeranjangPesanan();
@@ -80,13 +80,13 @@ public class Main {
         PembayaranTunai bayarCukup = new PembayaranTunai("PAY-002", 100000);
 
         boolean hasil2 = kasir.prosesTransaksi(trx2, bayarCukup);
-        System.out.println("  Hasil proses: " + (hasil2 ? "BERHASIL" : "GAGAL"));
+        System.out.println("Hasil proses: " + (hasil2 ? "BERHASIL" : "GAGAL"));
 
         // ==============================================================
         // SKENARIO 3: Pembayaran E-Wallet BERHASIL
         // ==============================================================
         System.out.println("\n\n══════════════════════════════════════════");
-        System.out.println("  SKENARIO 3 : Pembayaran E-Wallet         ");
+        System.out.println("SKENARIO 3 : Pembayaran E-Wallet         ");
         System.out.println("══════════════════════════════════════════");
 
         KeranjangPesanan keranjang3 = new KeranjangPesanan();
@@ -96,7 +96,8 @@ public class Main {
 
         Transaksi trx3 = new Transaksi(keranjang3);
         double totalTrx3 = trx3.hitungTotalTagihan();
-        PembayaranEWallet bayarEWallet = new PembayaranEWallet("PAY-003", totalTrx3, "GoPay", "0812-3456-7890");
+        PembayaranEWallet bayarEWallet = new PembayaranEWallet(
+                "PAY-003", totalTrx3, "GoPay", "0812-3456-7890");
 
         boolean hasil3 = kasir.prosesTransaksi(trx3, bayarEWallet);
         System.out.println("Hasil proses: " + (hasil3 ? "BERHASIL" : "GAGAL"));
@@ -105,7 +106,7 @@ public class Main {
         // SKENARIO 4: Tutup Shift & Cetak LaporanShift
         // ==============================================================
         System.out.println("\n\n══════════════════════════════════════════");
-        System.out.println("  SKENARIO 4 : Tutup Shift & Laporan       ");
+        System.out.println("SKENARIO 4 : Tutup Shift & Laporan       ");
         System.out.println("══════════════════════════════════════════");
 
         LaporanShift laporan = kasir.tutupShift();
@@ -138,7 +139,7 @@ public class Main {
         // DEMO INTERFACE CetakDokumen (polymorphism)
         // ==============================================================
         System.out.println("\n\n══════════════════════════════════════════");
-        System.out.println("  DEMO INTERFACE CetakDokumen              ");
+        System.out.println("DEMO INTERFACE CetakDokumen              ");
         System.out.println("══════════════════════════════════════════");
         System.out.println("  Mencetak ulang struk trx2 via interface:");
         CetakDokumen dokumen = trx2;   // Polymorphism: Transaksi sebagai CetakDokumen
