@@ -16,8 +16,7 @@ public class Cemilan extends MenuItem {
     public Cemilan() {}
 
     // Membuat objek Cemilan dengan parameter lengkap
-    public Cemilan(String kodeItem, String namaItem, double harga,
-                   String jenisTopping, boolean tersediaGluten) {
+    public Cemilan(String kodeItem, String namaItem, double harga, String jenisTopping, boolean tersediaGluten) {
         super(kodeItem, namaItem, harga);
         this.jenisTopping   = jenisTopping;
         this.tersediaGluten = tersediaGluten;
@@ -54,7 +53,7 @@ public class Cemilan extends MenuItem {
     }
 
     /* Method Overloading */
-    // Memesan cemilan dengan topping default dari objek
+    // Memesan cemilan default dari objek
     public String pesan() {
         String glutenInfo = tersediaGluten ? "Mengandung Gluten" : "Bebas Gluten";
         return "Memesan: " + getNamaItem() + " +" + jenisTopping + " (" + glutenInfo + ")";
@@ -63,5 +62,11 @@ public class Cemilan extends MenuItem {
     // Memesan cemilan dengan topping pilihan
     public String pesan(String toppingPilihan) {
         return "Memesan: " + getNamaItem() + " + " + toppingPilihan;
+    }
+
+    // Memesan cemilan dengan pilihan status glute
+    public String pesan(boolean pilihanGluten) {
+        String glutenInfo = pilihanGluten ? "Mengandung Gluten" : "Bebas Gluten";
+        return "Memesan: " + getNamaItem() + " +" + jenisTopping + " (" + glutenInfo + ")";
     }
 }
