@@ -1,6 +1,10 @@
 # PBO-TugasKelompok
 Tugas untuk Mata Kuliah PBO 2026
+
+<img width="3264" height="2260" alt="20260331_182841" src="https://github.com/user-attachments/assets/ee78860c-9649-4fb1-bc91-c1a9435eb776" />
+
 ---
+
 ## Getting Started
 
 Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
