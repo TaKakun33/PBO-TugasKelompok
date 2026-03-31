@@ -11,9 +11,6 @@ public class PembayaranTunai extends Pembayaran {
     /******** Method ********/
 
     /* Konstruktor */
-    // Membuat objek PembayaranTunai tanpa parameter
-    public PembayaranTunai() {}
-
     // Membuat objek PembayaranTunai dengan parameter
     public PembayaranTunai(String idPembayaran, double uangDiterima) {
         super(idPembayaran, uangDiterima, "Uang Tunai");
@@ -36,25 +33,23 @@ public class PembayaranTunai extends Pembayaran {
     /* Method Override */
     // Memvalidasi kecukupan pembayaran tunai (overriding dari Pembayaran)
     @Override
-    public void validasiPembayaran(double totalTagihan)
-            throws PembayaranKurangException {
-        System.out.println("[INFO] Memvalidasi pembayaran tunai...");
+    public void validasiPembayaran(double totalTagihan) throws PembayaranKurangException {
+        System.out.println("Memvalidasi pembayaran tunai");
         if (uangDiterima < totalTagihan) {
             double kurang = totalTagihan - uangDiterima;
             throw new PembayaranKurangException(kurang);
         }
-        System.out.println("[OK]   Pembayaran tunai valid.");
+        System.out.println("Pembayaran tunai valid.");
     }
 
     /* Method Overloading */
     // Memvalidasi pembayaran tunai dengan pesan error kustom jika gagal
-    public void validasiPembayaran(double totalTagihan, String pesanKustom)
-            throws PembayaranKurangException {
-        System.out.println("[INFO] Memvalidasi pembayaran tunai (kustom)...");
+    public void validasiPembayaran(double totalTagihan, String pesanKustom) throws PembayaranKurangException {
+        System.out.println("Memvalidasi pembayaran tunai (dengan pesan kustom)");
         if (uangDiterima < totalTagihan) {
             double kurang = totalTagihan - uangDiterima;
             throw new PembayaranKurangException(pesanKustom, kurang);
         }
-        System.out.println("[OK]   Pembayaran tunai valid (kustom).");
+        System.out.println("Pembayaran tunai valid");
     }
 }

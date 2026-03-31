@@ -31,38 +31,27 @@ public class KeranjangPesanan {
     // Menambahkan satu ItemPesanan ke dalam keranjang
     public void tambahItem(ItemPesanan item) {
         daftarItem.add(item);
-        System.out.println("[+] " + item.getMenuItem().getNamaItem() + " x" + item.getQty() + " ditambahkan.");
     }
 
     // Menghapus item dari keranjang berdasarkan kodeItem
     public void hapusItem(String kodeItem) {
-        boolean dihapus = false;
-        
         for (int i = daftarItem.size() - 1; i >= 0; i--) {
             ItemPesanan item = daftarItem.get(i); 
-            
             if (item.getMenuItem().getKodeItem().equals(kodeItem)) {
                 daftarItem.remove(i); 
-                dihapus = true;
             }
-        }
-
-        if (dihapus) {
-            System.out.println("[-] Item kode " + kodeItem + " dihapus.");
-        } else {
-            System.out.println("[!] Item kode " + kodeItem + " tidak ditemukan.");
         }
     }
 
     // Mengecek apakah keranjang dalam keadaan kosong
     public boolean isEmpty() {
-        return daftarItem.isEmpty();
+        return daftarItem.size() == 0;
     }
 
     // Menghitung subtotal seluruh item sebelum pajak
     public double hitungSubtotal() {
         // Assertion: keranjang tidak boleh kosong saat menghitung subtotal
-        assert !daftarItem.isEmpty() : "KeranjangPesanan tidak boleh kosong saat menghitung subtotal!";
+        assert !daftarItem.isEmpty() : "daftarItem tidak boleh kosong";
         double total = 0.0; 
         for (int i = 0; i < daftarItem.size(); i++) {
             ItemPesanan item = daftarItem.get(i); 
@@ -75,10 +64,12 @@ public class KeranjangPesanan {
     public void tampilKeranjang() {
         if (daftarItem.isEmpty()) {
             System.out.println("(Keranjang kosong)");
-            return; //Break
+        } else {
+            for (int i = 0; i < daftarItem.size(); i++) {
+                ItemPesanan item = daftarItem.get(i);
+                System.out.println( item.getMenuItem().getNamaItem() + " x" + item.getQty()+ " = Rp " + String.format("%,.0f", item.getSubtotal()));
+            }
         }
-        for (ItemPesanan item : daftarItem) {
-            System.out.println( item.getMenuItem().getNamaItem() + " x" + item.getQty()+ " = Rp " + String.format("%,.0f", item.getSubtotal()));
-        }
+        
     }
 }

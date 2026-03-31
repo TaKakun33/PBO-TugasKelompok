@@ -12,9 +12,6 @@ public class Cemilan extends MenuItem {
     /******** Method ********/
 
     /* Konstruktor */
-    // Membuat objek Cemilan tanpa parameter
-    public Cemilan() {}
-
     // Membuat objek Cemilan dengan parameter lengkap
     public Cemilan(String kodeItem, String namaItem, double harga, String jenisTopping, boolean tersediaGluten) {
         super(kodeItem, namaItem, harga);
@@ -48,25 +45,10 @@ public class Cemilan extends MenuItem {
     // Mengembalikan info lengkap cemilan: kode, nama, harga, topping, dan info gluten
     @Override
     public void getInfo() {
-        String glutenInfo = tersediaGluten ? "Mengandung Gluten" : "Bebas Gluten";
-        System.out.println("[" + getKodeItem() + "] " + getNamaItem() + " - Rp " + getHarga() + " | +" + jenisTopping + " (" + glutenInfo + ")");
+        System.err.println("\nKodeItem Cemilan : " + getKodeItem());
+        System.err.println("Harga Cemilan : Rp " + String.format("%,.0f", getHarga()));
+        System.out.println("Jenis Topping Cemilan : " + getJenisTopping());
+        System.out.println("Apakah Tersedia Gluten? " + isTersediaGluten());
     }
 
-    /* Method Overloading */
-    // Memesan cemilan default dari objek
-    public String pesan() {
-        String glutenInfo = tersediaGluten ? "Mengandung Gluten" : "Bebas Gluten";
-        return "Memesan: " + getNamaItem() + " +" + jenisTopping + " (" + glutenInfo + ")";
-    }
-
-    // Memesan cemilan dengan topping pilihan
-    public String pesan(String toppingPilihan) {
-        return "Memesan: " + getNamaItem() + " + " + toppingPilihan;
-    }
-
-    // Memesan cemilan dengan pilihan status glute
-    public String pesan(boolean pilihanGluten) {
-        String glutenInfo = pilihanGluten ? "Mengandung Gluten" : "Bebas Gluten";
-        return "Memesan: " + getNamaItem() + " +" + jenisTopping + " (" + glutenInfo + ")";
-    }
 }

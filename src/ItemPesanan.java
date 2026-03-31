@@ -12,9 +12,6 @@ public class ItemPesanan {
     /******** Method ********/
 
     /* Konstruktor */
-    // Membuat objek ItemPesanan tanpa parameter
-    public ItemPesanan() {}
-
     // Membuat objek ItemPesanan dengan parameter
     public ItemPesanan(MenuItem menuItem, int qty) {
         this.menuItem = menuItem;

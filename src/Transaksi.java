@@ -11,19 +11,16 @@ public class Transaksi implements CetakDokumen {
 
     /******** Variable ********/
     private static int counterTransaksi = 0;   
-    private String idTransaksi;
     private LocalDateTime waktuTransaksi;
     private boolean selesai;
     private KeranjangPesanan keranjang;   
     private Pembayaran pembayaran;  
+    private String idTransaksi;
     private static final double PAJAK = 0.10;
 
     /******** Method ********/
 
     /* Konstruktor */
-    // Membuat objek Transaksi tanpa parameter
-    public Transaksi() {}
-
     // Membuat objek Transaksi dengan keranjang yang sudah terisi
     public Transaksi(KeranjangPesanan keranjang) {
         counterTransaksi++;
@@ -68,8 +65,7 @@ public class Transaksi implements CetakDokumen {
     /* Method Lainnya */
     // Menghitung total tagihan setelah pajak ditambahkan
     public double hitungTotalTagihan() {
-        double subtotal = keranjang.hitungSubtotal();
-        return subtotal + hitungPajak();
+        return keranjang.hitungSubtotal() + hitungPajak();
     }
 
     // Menghitung nilai pajak saja (10% dari subtotal)
@@ -80,7 +76,7 @@ public class Transaksi implements CetakDokumen {
     // Menyelesaikan transaksi setelah pembayaran berhasil divalidasi
     public void selesaikanTransaksi() {
         this.selesai = true;
-        System.out.println("[OK]   Transaksi " + idTransaksi + " selesai.");
+        System.out.println("Transaksi : " + idTransaksi + " selesai.");
     }
 
     /* Method Override dari CetakDokumen */

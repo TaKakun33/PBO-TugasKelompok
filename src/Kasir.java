@@ -13,9 +13,6 @@ public class Kasir {
     /******** Method ********/
 
     /* Konstruktor */
-    // Membuat objek Kasir tanpa parameter
-    public Kasir() {}
-
     // Membuat objek Kasir dengan parameter lengkap
     public Kasir(String idKasir, String namaKasir, String shift) {
         this.idKasir   = idKasir;
@@ -48,13 +45,12 @@ public class Kasir {
     /* Method Lainnya */
     // Memproses transaksi: validasi pembayaran, selesaikan, dan cetak struk
     public boolean prosesTransaksi(Transaksi transaksi, Pembayaran bayar) {
-        System.out.println("\n[KASIR] " + namaKasir + " memproses " + transaksi.getIdTransaksi() + "...");
-
+        System.out.println("\n" + namaKasir + " memproses " + transaksi.getIdTransaksi() + "...");
         // Assertion: keranjang tidak boleh kosong sebelum proses
         assert !transaksi.getKeranjang().isEmpty(): "Tidak bisa memproses transaksi dengan keranjang kosong!";
 
         double total = transaksi.hitungTotalTagihan();
-        System.out.println("[INFO] Total tagihan: Rp " + String.format("%,.0f", total));
+        System.out.println("Total tagihan: Rp " + String.format("%,.0f", total));
 
         transaksi.setPembayaran(bayar);
 
@@ -65,20 +61,21 @@ public class Kasir {
             return true;
 
         } catch (PembayaranKurangException e) {
-            System.out.println("[ERROR] " + e.getMessage());
-            System.out.println("[INFO]  Kekurangan: Rp " + String.format("%,.0f", e.getJumlahKurang()));
-            System.out.println("[INFO]  Transaksi dibatalkan.");
+            System.out.println(e.getMessage());
+            System.out.println("Kekurangan: Rp " + String.format("%,.0f", e.getJumlahKurang()));
+            System.out.println("Transaksi dibatalkan.");
             return false;
         }
     }
 
     // Menampilkan ringkasan transaksi tanpa memprosesnya
     public void tampilRingkasanTransaksi(Transaksi transaksi) {
-        System.out.println("\n[KASIR] Ringkasan " + transaksi.getIdTransaksi());
+        System.out.println("\nRingkasan " + transaksi.getIdTransaksi());
         transaksi.getKeranjang().tampilKeranjang();
         System.out.println("Total (termasuk pajak): Rp " + String.format("%,.0f", transaksi.hitungTotalTagihan()));
     }
 
+    // Overloading
     // Menampilkan ringkasan dengan opsi header nama kasir (overloading)
     public void tampilRingkasanTransaksi(Transaksi transaksi, boolean tampilNamaKasir) {
         if (tampilNamaKasir) {
@@ -89,7 +86,7 @@ public class Kasir {
 
     // Menutup shift dan menghasilkan LaporanShift untuk shift ini
     public LaporanShift tutupShift() {
-        System.out.println("\n[SISTEM] Kasir " + namaKasir + " menutup shift " + shift + ".");
+        System.out.println("\n" + namaKasir + " menutup shift " + shift);
         LaporanShift laporan = new LaporanShift(this);
         return laporan;
     }
@@ -97,8 +94,7 @@ public class Kasir {
     /* Method Lainnya */
     // Mencetak informasi kasir yang sedang bertugas
     public void printInfo() {
-        System.out.println("Kasir[" + idKasir + "] " + namaKasir
-                + " (Shift: " + shift + ")");
+        System.out.println("Kasir[" + idKasir + "] " + namaKasir + " (Shift: " + shift + ")");
     }
 
 }

@@ -12,9 +12,6 @@ public class Minuman extends MenuItem {
     /******** Method ********/
 
     /* Konstruktor */
-    // Membuat objek Minuman tanpa parameter
-    public Minuman() {}
-
     // Membuat objek Minuman dengan parameter lengkap
     public Minuman(String kodeItem, String namaItem, double harga, String ukuran, boolean panas) {
         super(kodeItem, namaItem, harga);
@@ -48,24 +45,9 @@ public class Minuman extends MenuItem {
     // Mengembalikan info lengkap minuman: kode, nama, harga, ukuran, dan suhu
     @Override
     public void getInfo() {
-        String suhu = panas ? "Panas" : "Dingin";
-        System.out.println("[" + getKodeItem() + "] " + getNamaItem() + " - Rp " + String.format("%,.0f", getHarga()) + " | " + ukuran + " (" + suhu + ")");
-    }
-    /* Method Overloading */
-    // Memesan minuman dengan ukuran dan suhu default dari objek
-    public String pesan() {
-        String suhu = panas ? "Panas" : "Dingin";
-        return "Memesan: " + getNamaItem() + " - " + ukuran + " (" + suhu + ")";
-    }
-
-    // Memesan minuman dengan ukuran pilihan
-    public String pesan(String ukuranPilihan) {
-        return "Memesan: " + getNamaItem() + " - " + ukuranPilihan;
-    }
-
-    // Memesan minuman dengan ukuran dan suhu pilihan
-    public String pesan(String ukuranPilihan, boolean panasRequest) {
-        String suhu = panasRequest ? "Panas" : "Dingin";
-        return "Memesan: " + getNamaItem() + " - " + ukuranPilihan + " (" + suhu + ")";
+        System.err.println("\nKodeItem Minuman : " + getKodeItem());
+        System.err.println("Harga Minuman : Rp " + String.format("%,.0f", getHarga()));
+        System.out.println("Ukuran Minuman : " + getUkuran());
+        System.out.println("Apakah Panas? " + isPanas());
     }
 }

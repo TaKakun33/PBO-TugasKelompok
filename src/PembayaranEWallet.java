@@ -12,12 +12,8 @@ public class PembayaranEWallet extends Pembayaran {
     /******** Method ********/
 
     /* Konstruktor */
-    // Membuat objek PembayaranEWallet tanpa parameter
-    public PembayaranEWallet() {}
-
     // Membuat objek PembayaranEWallet dengan parameter lengkap
-    public PembayaranEWallet(String idPembayaran, double jumlahBayar,
-                             String namaWallet, String nomorWallet) {
+    public PembayaranEWallet(String idPembayaran, double jumlahBayar, String namaWallet, String nomorWallet) {
         super(idPembayaran, jumlahBayar, "E-Wallet (" + namaWallet + ")");
         this.namaWallet   = namaWallet;
         this.nomorWallet  = nomorWallet;
@@ -49,11 +45,22 @@ public class PembayaranEWallet extends Pembayaran {
     // Memvalidasi pembayaran e-wallet (overriding dari Pembayaran)
     @Override
     public void validasiPembayaran(double totalTagihan) throws PembayaranKurangException {
-        System.out.println("[INFO] Memvalidasi pembayaran " + namaWallet + "...");
+        System.out.println("Memvalidasi pembayaran " + namaWallet );
         if (getJumlahBayar() < totalTagihan) {
             double kurang = totalTagihan - getJumlahBayar();
             throw new PembayaranKurangException(kurang);
         }
-        System.out.println("[OK]   Pembayaran e-wallet valid. No. " + nomorWallet);
+        System.out.println("Pembayaran e-wallet valid. No. " + nomorWallet);
+    }
+
+    /* Method Overloading */
+    // Memvalidasi pembayaran e-wallet dengan pesan error kustom jika gagal
+    public void validasiPembayaran(double totalTagihan, String pesanKustom) throws PembayaranKurangException {
+        System.out.println("Memvalidasi pembayaran " + namaWallet + " (dengan pesan kustom)");
+        if (getJumlahBayar() < totalTagihan) {
+            double kurang = totalTagihan - getJumlahBayar();
+            throw new PembayaranKurangException(pesanKustom, kurang);
+        }
+        System.out.println("Pembayaran e-wallet valid. No. " + nomorWallet);
     }
 }

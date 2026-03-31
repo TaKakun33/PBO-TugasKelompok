@@ -2,13 +2,12 @@
  * Deskripsi  : Main Menu aplikasi POS Kedai Teh Tarik Bakar.
  */
 
-/******** Class Main ********/
 public class Main {
 
     public static void main(String[] args) {
 
         System.out.println("╔══════════════════════════════════════════╗");
-        System.out.println("║   SISTEM POS - KEDAI TEH TARIK BAKAR    ║");
+        System.out.println("║   SISTEM POS - KEDAI TEH TARIK BAKAR     ║");
         System.out.println("╚══════════════════════════════════════════╝");
 
         // ---- Inisialisasi Item Menu ----
@@ -27,14 +26,6 @@ public class Main {
         rotiBarang.getInfo();
         pisangCoklat.getInfo();
 
-        // ---- Demo Overloading ----
-        System.out.println("\n=== DEMO METHOD OVERLOADING ===");
-        System.out.println(tehTarik.pesan());
-        System.out.println(tehTarik.pesan("Large"));
-        System.out.println(tehTarik.pesan("Large", false));
-        System.out.println(rotiBarang.pesan());
-        System.out.println(rotiBarang.pesan("Strawberry"));
-
         // ---- Demo Overriding getInfo() ----
         System.out.println("\n=== DEMO METHOD OVERRIDING (getInfo) ===");
         MenuItem[] menu = {tehTarik, kopiTarik, rotiBarang, pisangCoklat};
@@ -51,7 +42,7 @@ public class Main {
         // SKENARIO 1: Pembayaran Tunai GAGAL (uang kurang)
         // ==============================================================
         System.out.println("\n\n══════════════════════════════════════════");
-        System.out.println("SKENARIO 1 : Pembayaran Tunai (Kurang)  ");
+        System.out.println("SKENARIO 1 : Pembayaran Tunai (Kurang)    ");
         System.out.println("══════════════════════════════════════════");
 
         KeranjangPesanan keranjang1 = new KeranjangPesanan();
@@ -61,15 +52,43 @@ public class Main {
         Transaksi trx1 = new Transaksi(keranjang1);
         PembayaranTunai bayarKurang = new PembayaranTunai("PAY-001", 30000);
 
-        kasir.tampilRingkasanTransaksi(trx1, true);
+        // --------------------------------------------------------------
+        // TAMBAHAN: DEMO METHOD OVERLOADING 
+        // --------------------------------------------------------------
+        System.out.println("\n--- DEMO METHOD OVERLOADING (tampilRingkasanTransaksi) ---");
+        System.out.println("-> Pemanggilan Versi 1 (Hanya 1 parameter Transaksi):");
+        kasir.tampilRingkasanTransaksi(trx1); 
+        
+        System.out.println("\n-> Pemanggilan Versi 2 (Dengan parameter boolean untuk nama kasir):");
+        kasir.tampilRingkasanTransaksi(trx1, true); 
+
+        System.out.println("\n--- DEMO METHOD OVERLOADING (validasiPembayaran) ---");
+        double totalTagihanTrx1 = trx1.hitungTotalTagihan();
+        
+        System.out.println("-> Pemanggilan Versi 1 (Validasi standar):");
+        try {
+            bayarKurang.validasiPembayaran(totalTagihanTrx1);
+        } catch (Exception e) {
+            System.out.println("Exception ditangkap: " + e.getMessage());
+        }
+
+        System.out.println("\n-> Pemanggilan Versi 2 (Validasi dengan custom error message):");
+        try {
+            bayarKurang.validasiPembayaran(totalTagihanTrx1, "Uang tunai pelanggan tidak mencukupi!");
+        } catch (Exception e) {
+            System.out.println("Exception ditangkap: " + e.getMessage());
+        }
+        System.out.println("--------------------------------------------------------------\n");
+
+        // Lanjut ke proses transaksi utama di Skenario 1
         boolean hasil1 = kasir.prosesTransaksi(trx1, bayarKurang);
-        System.out.println("Hasil proses: " + (hasil1 ? "BERHASIL" : "GAGAL"));
+        System.out.println("Hasil proses akhir: " + (hasil1 ? "BERHASIL" : "GAGAL"));
 
         // ==============================================================
         // SKENARIO 2: Pembayaran Tunai BERHASIL
         // ==============================================================
         System.out.println("\n\n══════════════════════════════════════════");
-        System.out.println("SKENARIO 2 : Pembayaran Tunai (Cukup)   ");
+        System.out.println("SKENARIO 2 : Pembayaran Tunai (Cukup)     ");
         System.out.println("══════════════════════════════════════════");
 
         KeranjangPesanan keranjang2 = new KeranjangPesanan();
@@ -86,7 +105,7 @@ public class Main {
         // SKENARIO 3: Pembayaran E-Wallet BERHASIL
         // ==============================================================
         System.out.println("\n\n══════════════════════════════════════════");
-        System.out.println("SKENARIO 3 : Pembayaran E-Wallet         ");
+        System.out.println("SKENARIO 3 : Pembayaran E-Wallet          ");
         System.out.println("══════════════════════════════════════════");
 
         KeranjangPesanan keranjang3 = new KeranjangPesanan();
@@ -106,7 +125,7 @@ public class Main {
         // SKENARIO 4: Tutup Shift & Cetak LaporanShift
         // ==============================================================
         System.out.println("\n\n══════════════════════════════════════════");
-        System.out.println("SKENARIO 4 : Tutup Shift & Laporan       ");
+        System.out.println("SKENARIO 4 : Tutup Shift & Laporan        ");
         System.out.println("══════════════════════════════════════════");
 
         LaporanShift laporan = kasir.tutupShift();

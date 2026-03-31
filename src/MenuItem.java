@@ -13,9 +13,6 @@ public abstract class MenuItem {
     /******** Method ********/
 
     /* Konstruktor */
-    // Membuat objek MenuItem tanpa parameter
-    public MenuItem() {}
-
     // Membuat objek MenuItem dengan parameter
     public MenuItem(String kodeItem, String namaItem, double harga) {
         this.kodeItem = kodeItem;

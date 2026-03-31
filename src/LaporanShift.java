@@ -17,16 +17,14 @@ public class LaporanShift implements CetakDokumen {
     private List<Transaksi> daftarTransaksi; 
     private Kasir kasir;    
     private double totalPendapatan;
+    private static int counterLaporan = 0;  
 
     /******** Method ********/
 
     /* Konstruktor */
-    // Membuat objek LaporanShift tanpa parameter
-    public LaporanShift() {}
-
     // Membuat objek LaporanShift dengan kasir yang bertugas
     public LaporanShift(Kasir kasir) {
-        this.idLaporan       = "LAP-" + System.currentTimeMillis();
+        this.idLaporan       = String.format("LAP-%04d", counterLaporan);
         this.waktuGenerate   = LocalDateTime.now();
         this.kasir           = kasir;
         this.daftarTransaksi = new ArrayList<>();
@@ -60,24 +58,26 @@ public class LaporanShift implements CetakDokumen {
         if (transaksi.isSelesai()) {
             daftarTransaksi.add(transaksi);
             totalPendapatan += transaksi.hitungTotalTagihan();
-            System.out.println("[LAPORAN] " + transaksi.getIdTransaksi() + " ditambahkan ke laporan shift.");
+            System.out.println(transaksi.getIdTransaksi() + " ditambahkan ke laporan shift.");
         } else {
-            System.out.println("[!] Transaksi " + transaksi.getIdTransaksi() + " belum selesai, tidak dicatat.");
+            System.out.println("Transaksi " + transaksi.getIdTransaksi() + " belum selesai, tidak dicatat.");
         }
     }
 
-    // Menghitung ulang total pendapatan dari seluruh transaksi yang tercatat
+// Menghitung ulang total pendapatan dari seluruh transaksi yang tercatat
     public double hitungTotalPendapatan() {
-        totalPendapatan = daftarTransaksi.stream().mapToDouble(Transaksi::hitungTotalTagihan).sum();
+        totalPendapatan = 0.0;         
+        for (Transaksi trx : daftarTransaksi) {
+            totalPendapatan += trx.hitungTotalTagihan();
+        }
         return totalPendapatan;
     }
 
     /* Method Override dari CetakDokumen */
     // Mencetak laporan shift lengkap ke konsol (implementasi CetakDokumen)
     @Override
-public void cetak() {
+    public void cetak() {
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-        
         System.out.println("*******************************************");
         System.out.println("        LAPORAN SHIFT — TEH TARIK BAKAR   ");
         System.out.println("*******************************************");

@@ -13,9 +13,6 @@ public abstract class Pembayaran {
     /******** Method ********/
 
     /* Konstruktor */
-    // Membuat objek Pembayaran tanpa parameter
-    public Pembayaran() {}
-
     // Membuat objek Pembayaran dengan parameter
     public Pembayaran(String idPembayaran, double jumlahBayar, String metodePembayaran) {
         this.idPembayaran     = idPembayaran;
