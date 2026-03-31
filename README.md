@@ -2,13 +2,10 @@
 Tugas untuk Mata Kuliah PBO 2026
 
 ## Aggota Kelompok
-Akmal Kafli Anan	24060124120042
-
-Azka Aqylla Maulana	24060124140195
-
-Adel Rayyan Hakim	24060124140173
-
-Wipin Saputra Poh	24060124130080
+- Akmal Kafli Anan	24060124120042
+- Azka Aqylla Maulana	24060124140195
+- Adel Rayyan Hakim	24060124140173
+- Wipin Saputra Poh	24060124130080
 
 ## Class Diagram
 <img width="3264" height="2260" alt="20260331_182841" src="https://github.com/user-attachments/assets/ee78860c-9649-4fb1-bc91-c1a9435eb776" />
